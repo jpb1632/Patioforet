@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -18,9 +18,9 @@
   <meta name="twitter:title" content="양주역 중흥S-클래스" />
   <meta name="twitter:description" content="☎ 1688-4008 | 선착순 동·호수 지정 | 공공지원 민간임대 | 중도금 무이자 | 관심고객등록" />
   <meta name="twitter:image" content="https://jpb1632.github.io/Sclass/static/og/link_v2.png" />
-  <link rel="icon" type="image/png" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
-  <link rel="shortcut icon" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
-  <link rel="apple-touch-icon" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
+  <link rel="icon" type="image/png" href="./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/patio/Favicon.png?v=2" />
+  <link rel="shortcut icon" href="./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/patio/Favicon.png?v=2" />
+  <link rel="apple-touch-icon" href="./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/patio/Favicon.png?v=2" />
   <style>
     html, body {
       margin: 0;
@@ -66,6 +66,13 @@
 
       if (!frame) return;
 
+      const clearConsultationHash = () => {
+        if (window.location.hash !== "#consultation") return;
+        try {
+          history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+        } catch (_) {}
+      };
+
       const scrollFrameToHash = (hash) => {
         if (!hash) return;
 
@@ -74,14 +81,14 @@
             const frameWindow = frame.contentWindow;
             const frameDocument = frameWindow && frameWindow.document;
             const isConsultationHash = hash === "#consultation";
-            const targetSelector = isConsultationHash ? ".properties-N9 .title-area" : hash;
+            const targetSelector = isConsultationHash ? ".properties-N9 .consultation-anchor" : hash;
             const target = frameDocument && (frameDocument.querySelector(targetSelector) || frameDocument.querySelector(hash));
             if (!target) return;
 
             const rect = target.getBoundingClientRect();
             const absoluteTop = rect.top + frameWindow.scrollY;
             const offset = isConsultationHash
-              ? (frameWindow.innerWidth <= 992 ? 112 : 152)
+              ? (frameWindow.innerWidth <= 992 ? 96 : 126)
               : (frameWindow.innerWidth <= 992 ? 84 : 116);
 
             frameWindow.scrollTo({
@@ -98,16 +105,25 @@
 
       const syncFrameHash = () => {
         const hash = window.location.hash || "";
-        const nextSrc = hash ? `${baseSrc}${hash}` : baseSrc;
+        const nextSrc = hash === "#consultation"
+          ? `${baseSrc}?consultation=1`
+          : baseSrc;
         if (frame.getAttribute("src") !== nextSrc) {
           frame.setAttribute("src", nextSrc);
         } else {
           scrollFrameToHash(hash);
+          if (hash === "#consultation") {
+            window.setTimeout(clearConsultationHash, 1200);
+          }
         }
       };
 
       frame.addEventListener("load", () => {
-        scrollFrameToHash(window.location.hash || "");
+        const hash = window.location.hash || "";
+        scrollFrameToHash(hash);
+        if (hash === "#consultation") {
+          window.setTimeout(clearConsultationHash, 1200);
+        }
       });
 
       syncFrameHash();
@@ -116,3 +132,4 @@
   </script>
 </body>
 </html>
+
