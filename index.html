@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>양주역 중흥S-클래스</title>
+  <meta name="description" content="☎ 1688-4008 | 선착순 동·호수 지정 | 공공지원 민간임대 | 중도금 무이자 | 관심고객등록" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="양주역 중흥S-클래스" />
+  <meta property="og:title" content="양주역 중흥S-클래스" />
+  <meta property="og:description" content="☎ 1688-4008 | 선착순 동·호수 지정 | 공공지원 민간임대 | 중도금 무이자 | 관심고객등록" />
+  <meta property="og:url" content="https://jpb1632.github.io/Sclass/" />
+  <meta property="og:image" content="https://jpb1632.github.io/Sclass/static/og/link_v2.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="양주역 중흥S-클래스" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="양주역 중흥S-클래스" />
+  <meta name="twitter:description" content="☎ 1688-4008 | 선착순 동·호수 지정 | 공공지원 민간임대 | 중도금 무이자 | 관심고객등록" />
+  <meta name="twitter:image" content="https://jpb1632.github.io/Sclass/static/og/link_v2.png" />
+  <link rel="icon" type="image/png" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
+  <link rel="shortcut icon" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
+  <link rel="apple-touch-icon" href="https://jpb1632.github.io/Sclass/static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/resources/images/html_logo_v3.png" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      background: #040812;
+      overscroll-behavior: none;
+    }
+    body {
+      position: fixed;
+      inset: 0;
+    }
+    .app-frame {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      height: 100dvh;
+      border: 0;
+      display: block;
+      background: #040812;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    id="app-frame"
+    class="app-frame"
+    title="양주역 중흥S-클래스"
+    src="./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt).html"
+    loading="eager"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+  <script>
+    (function () {
+      const baseSrc = "./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt).html";
+      const frame = document.getElementById("app-frame");
+
+      if (!frame) return;
+
+      const scrollFrameToHash = (hash) => {
+        if (!hash) return;
+
+        const applyScroll = () => {
+          try {
+            const frameWindow = frame.contentWindow;
+            const frameDocument = frameWindow && frameWindow.document;
+            const isConsultationHash = hash === "#consultation";
+            const targetSelector = isConsultationHash ? ".properties-N9 .title-area" : hash;
+            const target = frameDocument && (frameDocument.querySelector(targetSelector) || frameDocument.querySelector(hash));
+            if (!target) return;
+
+            const rect = target.getBoundingClientRect();
+            const absoluteTop = rect.top + frameWindow.scrollY;
+            const offset = isConsultationHash
+              ? (frameWindow.innerWidth <= 992 ? 112 : 152)
+              : (frameWindow.innerWidth <= 992 ? 84 : 116);
+
+            frameWindow.scrollTo({
+              top: Math.max(0, absoluteTop - offset),
+              behavior: "auto"
+            });
+          } catch (_) {}
+        };
+
+        [40, 180, 420, 900, 1600].forEach((delay) => {
+          window.setTimeout(applyScroll, delay);
+        });
+      };
+
+      const syncFrameHash = () => {
+        const hash = window.location.hash || "";
+        const nextSrc = hash ? `${baseSrc}${hash}` : baseSrc;
+        if (frame.getAttribute("src") !== nextSrc) {
+          frame.setAttribute("src", nextSrc);
+        } else {
+          scrollFrameToHash(hash);
+        }
+      };
+
+      frame.addEventListener("load", () => {
+        scrollFrameToHash(window.location.hash || "");
+      });
+
+      syncFrameHash();
+      window.addEventListener("hashchange", syncFrameHash);
+    })();
+  </script>
+</body>
+</html>

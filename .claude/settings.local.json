@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(head:*)",
+      "Bash(wc:*)",
+      "Bash(ls:*)",
+      "Bash(for i in 1 2 3 4 5 6 7)",
+      "Bash(do cp \"C:/Users/JPB/Documents/temha-cli-main/정준교-workspace/부동산 \\(oLWSmCRkmlw6kEpt\\)/resources/images/1-1 \\($i\\).png\" \"C:/Users/JPB/Documents/temha-cli-main/static/프로젝트/부동산 \\(oLWSmCRkmlw6kEpt\\)/resources/images/1-1 \\($i\\).png\")",
+      "Bash(done)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(gulp:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
