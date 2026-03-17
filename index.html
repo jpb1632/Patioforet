@@ -63,33 +63,30 @@
     (function () {
       const baseSrc = "./static/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B6%80%EB%8F%99%EC%82%B0%20(oLWSmCRkmlw6kEpt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt)/%EC%B2%AB%ED%8E%98%EC%9D%B4%EC%A7%80%20(AdKpMlw6KePt).html";
       const frame = document.getElementById("app-frame");
-
       if (!frame) return;
 
-      const clearConsultationHash = () => {
-        if (window.location.hash !== "#consultation") return;
+      const isConsultationRequest = () => {
+        const params = new URLSearchParams(window.location.search);
+        return window.location.hash === "#consultation" || params.get("consultation") === "1";
+      };
+
+      const clearConsultationState = () => {
         try {
-          history.replaceState(null, "", ${window.location.pathname});
+          history.replaceState(null, "", window.location.pathname);
         } catch (_) {}
       };
 
-      const scrollFrameToHash = (hash) => {
-        if (!hash) return;
-
+      const scrollFrameToConsultation = () => {
         const applyScroll = () => {
           try {
             const frameWindow = frame.contentWindow;
             const frameDocument = frameWindow && frameWindow.document;
-            const isConsultationHash = hash === "#consultation";
-            const targetSelector = isConsultationHash ? ".properties-N9 .consultation-anchor" : hash;
-            const target = frameDocument && (frameDocument.querySelector(targetSelector) || frameDocument.querySelector(hash));
+            const target = frameDocument && frameDocument.querySelector('.properties-N9 .consultation-anchor');
             if (!target) return;
 
             const rect = target.getBoundingClientRect();
             const absoluteTop = rect.top + frameWindow.scrollY;
-            const offset = isConsultationHash
-              ? (frameWindow.innerWidth <= 992 ? 96 : 126)
-              : (frameWindow.innerWidth <= 992 ? 84 : 116);
+            const offset = frameWindow.innerWidth <= 992 ? 110 : 150;
 
             frameWindow.scrollTo({
               top: Math.max(0, absoluteTop - offset),
@@ -103,31 +100,27 @@
         });
       };
 
-      const syncFrameHash = () => {
-        const hash = window.location.hash || "";
-        const nextSrc = hash === "#consultation"
-          ? ${baseSrc}?consultation=1
-          : baseSrc;
+      const syncFrameRoute = () => {
+        const consultation = isConsultationRequest();
+        const nextSrc = consultation ? `${baseSrc}?consultation=1` : baseSrc;
+
         if (frame.getAttribute("src") !== nextSrc) {
           frame.setAttribute("src", nextSrc);
-        } else {
-          scrollFrameToHash(hash);
-          if (hash === "#consultation") {
-            window.setTimeout(clearConsultationHash, 1200);
-          }
+        } else if (consultation) {
+          scrollFrameToConsultation();
+          window.setTimeout(clearConsultationState, 800);
         }
       };
 
       frame.addEventListener("load", () => {
-        const hash = window.location.hash || "";
-        scrollFrameToHash(hash);
-        if (hash === "#consultation") {
-          window.setTimeout(clearConsultationHash, 1200);
-        }
+        if (!isConsultationRequest()) return;
+        scrollFrameToConsultation();
+        window.setTimeout(clearConsultationState, 800);
       });
 
-      syncFrameHash();
-      window.addEventListener("hashchange", syncFrameHash);
+      syncFrameRoute();
+      window.addEventListener("hashchange", syncFrameRoute);
+      window.addEventListener("popstate", syncFrameRoute);
     })();
   </script>
 </body>

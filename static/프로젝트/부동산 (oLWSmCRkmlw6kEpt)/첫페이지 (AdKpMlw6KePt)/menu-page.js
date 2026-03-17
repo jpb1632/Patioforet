@@ -101,7 +101,6 @@
       tabs: [
         { key: "community", label: "커뮤니티" },
         { key: "siteplan", label: "단지배치도" },
-        { key: "unitplan", label: "동 · 호수배치도" },
       ],
     },
     type: {
@@ -109,7 +108,7 @@
       topIndex: 2,
       tabs: [
         { key: "type", label: "타입안내" },
-        { key: "interior", label: "인테리어" },
+        { key: "interior", label: "타운하우스" },
       ],
     },
     route: {
@@ -120,17 +119,86 @@
   };
 
   const TYPE_VARIANTS = {
-    type: [
-      { key: "59ac", label: "59m²A/C", image: "../resources/images/c1.png" },
-      { key: "59bd", label: "59m²B/D", image: "../resources/images/c2.png" },
-      { key: "84ac", label: "84m²A/C", image: "../resources/images/c3.png" },
-      { key: "84bd", label: "84m²B/D", image: "../resources/images/c4.png" },
-    ],
-    interior: [
-      { key: "59a", label: "59m²A", image: "../resources/images/d1.jpg" },
-      { key: "84a", label: "84m²A", image: "../resources/images/d2.jpg" },
-    ],
+    type: {
+      groups: [
+          {
+            key: "84c",
+            label: "84C",
+            items: [
+              { key: "84c1", label: "84C1", image: "../resources/images/patio/84C1.png" },
+              { key: "84c2", label: "84C2", image: "../resources/images/patio/84C2.png" },
+              { key: "84c3", label: "84C3", image: "../resources/images/patio/84C3.png" },
+              { key: "84c4", label: "84C4", image: "../resources/images/patio/84C4.png" },
+              { key: "84c5", label: "84C5", image: "../resources/images/patio/84C5.png" },
+              { key: "84c6", label: "84C6", image: "../resources/images/patio/84C6.png" },
+              { key: "84c7", label: "84C7", image: "../resources/images/patio/84C7.png" },
+              { key: "84c8", label: "84C8", image: "../resources/images/patio/84C8.png" },
+              { key: "84c9", label: "84C9", image: "../resources/images/patio/84C9.png" },
+              { key: "84c11", label: "84C11", image: "../resources/images/patio/84C11.png" },
+              { key: "84c12", label: "84C12", image: "../resources/images/patio/84C12.png" },
+              { key: "84c13", label: "84C13", image: "../resources/images/patio/84C13.png" },
+              { key: "84c14", label: "84C14", image: "../resources/images/patio/84C14.png" },
+            ],
+          },
+          {
+            key: "84i",
+            label: "84I",
+            items: [
+              { key: "84i1", label: "84I1", image: "../resources/images/patio/84I1.png" },
+              { key: "84i2", label: "84I2", image: "../resources/images/patio/84I2.png" },
+              { key: "84i3", label: "84I3", image: "../resources/images/patio/84I3.png" },
+              { key: "84i5", label: "84I5", image: "../resources/images/patio/84I5.png" },
+              { key: "84i6", label: "84I6", image: "../resources/images/patio/84I6.png" },
+              { key: "84i7", label: "84I7", image: "../resources/images/patio/84I7.png" },
+            ],
+          },
+          {
+            key: "84l",
+            label: "84L",
+            items: [
+              { key: "84l1", label: "84L1", image: "../resources/images/patio/84L1.png" },
+              { key: "84l2", label: "84L2", image: "../resources/images/patio/84L2.png" },
+            ],
+          },
+      ],
+    },
+    interior: {
+      groups: [],
+    },
   };
+
+  function getTypeVariantGroups(tab) {
+    const config = TYPE_VARIANTS[tab];
+    if (!config || !Array.isArray(config.groups)) return [];
+    return config.groups;
+  }
+
+  function getTypeVariantItems(tab) {
+    return getTypeVariantGroups(tab).flatMap((group) => group.items || []);
+  }
+
+  function getDefaultTypeVariant(tab) {
+    const groups = getTypeVariantGroups(tab);
+    if (!groups.length) return "";
+    const firstGroup = groups[0];
+    const firstItem = Array.isArray(firstGroup.items) ? firstGroup.items[0] : null;
+    return firstItem ? firstItem.key : "";
+  }
+
+  function getSelectedTypeVariant(tab, variantKey) {
+    const items = getTypeVariantItems(tab);
+    return items.find((item) => item.key === variantKey) || items[0] || null;
+  }
+
+  function getSelectedTypeVariantGroup(tab, variantKey) {
+    const groups = getTypeVariantGroups(tab);
+    if (!groups.length) return null;
+    return (
+      groups.find((group) =>
+        Array.isArray(group.items) && group.items.some((item) => item.key === variantKey)
+      ) || groups[0]
+    );
+  }
 
   const ROUTE_ROUGHMAP = {
     timestamp: "1772015268708",
@@ -146,45 +214,80 @@
     business: {
       overview: {
         title: "양주 백석 모아엘가 그랑데 사업개요",
-        subtitle: "양주역세권 '확신의 클래스'",
-        copy: "양주역세권의 중심! 자부심을 선점하라!",
+        subtitle: "양주에서 처음 만나는 힐스테이트",
+        copy: "집이 라이프를 바꾸는 순간",
         copySub: "",
-        image: "../resources/images/a1.png",
-        specs: [
-          ["사업명", "양주역세권지구 공동2 공동주택 신축공사"],
-          ["공급위치", "경기도 양주시 남방동 581번지"],
-          ["공급규모", "아파트 지하 최저 2층, 지상 최고 28층 4개동 총 526세대"],
+        image: "",
+        canvasLayout: [
+          { type: "image", src: "../resources/images/patio/Business1.png" },
+          { type: "gap", size: "lg" },
+          { type: "image", src: "../resources/images/patio/Business2.png" },
         ],
-        notes: [
-          "상기 투시도는 소비자의 이해를 돕기 위해 제작된 CG컷으로 측면 그래픽, 분양 및 외부색채, 단지조경, 세부식재, 외관 디테일 등은 실제 시공 시 변경될 수 있습니다.",
-          "상기 CG이미지의 조경 및 옹벽 계획 등은 고객의 이해를 돕기 위해 제작된 것으로 실제 시공 시 변경될 수 있습니다."
-        ],
+        specs: [],
+        notes: [],
       },
       location: {
         title: "양주 백석 모아엘가 그랑데 입지환경",
-        subtitle: "기다려온 양주의 새로운 중심,",
-        copy: "기다려온 양주역세권 프리미엄",
+        subtitle: "양주 옥정신도시의 중심에서",
+        copy: "도시와 숲을 동시에 마주하는 라이프",
         copySub: "",
-        image: "../resources/images/a2_v1.png",
+        image: "",
+        canvasLayout: [
+          { type: "image", src: "../resources/images/patio/Locat1.png" },
+          { type: "image", src: "../resources/images/patio/Locat1_subtext.png" },
+        ],
         specs: [],
         notes: [],
       },
       brand: {
         title: "양주 백석 모아엘가 그랑데 브랜드소개",
-        subtitle: "'사는 이의 자부심과 품격이 남다른'",
-        copy: "명품 라이프 브랜드",
+        subtitle: "코르도바라이프의 시작",
+        copy: "힐스테이트 파티오포레!",
         copySub: "",
         image: "",
-        images: ["../resources/images/a3.png", "../resources/images/a3_v1.png"],
+        canvasLayout: [
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/brand_text1.png" },
+          { type: "gap", size: "sm" },
+          { type: "image", src: "../resources/images/patio/brand_text2.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/brand_main1.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/brand_main2.png" },
+          { type: "gap", size: "md" },
+          {
+            type: "row",
+            columns: 3,
+            images: [
+              "../resources/images/patio/brand_sub1.png",
+              "../resources/images/patio/brand_sub2.png",
+              "../resources/images/patio/brand_sub3.png",
+            ],
+          },
+          { type: "gap", size: "sm" },
+          { type: "image", src: "../resources/images/patio/brand_subtext.png" },
+        ],
         specs: [],
         notes: [],
       },
       premium: {
         title: "양주 백석 모아엘가 그랑데 프리미엄",
-        subtitle: "기다려온 양주의 새로운 중심.",
-        copy: "기다려온 양주역세권 프리미엄",
+        subtitle: "아파트에서 못 다 이룬",
+        copy: "공간의 로망을 현실로!",
         copySub: "",
-        image: "../resources/images/a4.png",
+        image: "",
+        canvasLayout: [
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Premium_text.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Premium_main1.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Premium_main2.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Premium_main3.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Premium_main4.png" },
+        ],
         specs: [],
         notes: [],
       },
@@ -206,17 +309,130 @@
         image: "../resources/images/complex guide1.jpg",
       },
       community: {
-        subtitle: "커뮤니티",
-        copy: "온 가족이 함께 즐기는 고품격 커뮤니티 라이프",
-        copySub: "",
-        image: "../resources/images/b1.jpg",
-      },
-      siteplan: {
-        subtitle: "단지배치도",
-        copy: "즐거움과 휴식을 선사하는 쾌적한 힐링 단지",
+        subtitle: "일상을 다채롭게 채워주는",
+        copy: "수준 높은 33개의 커뮤니티",
         copySub: "",
         image: "",
-        images: ["../resources/images/b2.jpg", "../resources/images/b2_1.jpg"],
+        canvasLayout: [
+          { type: "image", src: "../resources/images/patio/Community1_text.png" },
+          { type: "gap", size: "md" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              { type: "image", src: "../resources/images/patio/Community1_left.png" },
+              { type: "image", src: "../resources/images/patio/Community1_right.png", className: "is-offset-down" },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Community2.png" },
+          { type: "image", src: "../resources/images/patio/Community2_subtext.png" },
+        ],
+      },
+      siteplan: {
+        subtitle: "총 809세대 대단지 단독주택",
+        copy: "대단지 아파트 수준의 규모있는 커뮤니티",
+        copySub: "",
+        image: "",
+        canvasLayout: [
+          { type: "image", src: "../resources/images/patio/arrangement_main.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_1.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              { type: "image", src: "../resources/images/patio/arrangement_left_1.png" },
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_right1_1.png",
+                  "../resources/images/patio/arrangement_right2_1.png",
+                ],
+              },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_2.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_left1_2.png",
+                  "../resources/images/patio/arrangement_left2_2.png",
+                ],
+              },
+              { type: "image", src: "../resources/images/patio/arrangement_right_2.png" },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_3.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              { type: "image", src: "../resources/images/patio/arrangement_left_3.png" },
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_right1_3.png",
+                  "../resources/images/patio/arrangement_right2_3.png",
+                ],
+              },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_4.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_left1_4.png",
+                  "../resources/images/patio/arrangement_left2_4.png",
+                ],
+              },
+              { type: "image", src: "../resources/images/patio/arrangement_right_4.png" },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_5.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              { type: "image", src: "../resources/images/patio/arrangement_left_5.png" },
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_right1_5.png",
+                  "../resources/images/patio/arrangement_right2_5.png",
+                ],
+              },
+            ],
+          },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/arrangement_text_6.png" },
+          {
+            type: "row",
+            columns: 2,
+            items: [
+              {
+                type: "stack",
+                images: [
+                  "../resources/images/patio/arrangement_left1_6.png",
+                  "../resources/images/patio/arrangement_left2_6.png",
+                ],
+              },
+              { type: "image", src: "../resources/images/patio/arrangement_right_6.png" },
+            ],
+          },
+        ],
       },
       unitplan: {
         subtitle: "동호수배치도",
@@ -243,8 +459,8 @@
     type: {
       type: {
         title: "양주 백석 모아엘가 그랑데",
-        subtitle: "중소형 특화 총 526세대 브랜드 단지",
-        copy: "선호도 높은 평형(59㎡/84㎡)",
+        subtitle: "일상을 다채롭게 채워주는",
+        copy: "수준 높은 33개의 커뮤니티",
         copySub: "",
         image: "",
         specs: [],
@@ -252,10 +468,30 @@
       },
       interior: {
         title: "양주 백석 모아엘가 그랑데",
-        subtitle: "중소형 특화 총 526세대 브랜드 단지",
-        copy: "선호도 높은 평형(59㎡/84㎡)",
+        subtitle: "아파트에선 상상만 했던,",
+        copy: "로망을 현실로 만들어주는 타운하우스!",
         copySub: "",
         image: "",
+        canvasLayout: [
+          { type: "image", src: "../resources/images/patio/Rooftop_text_v2.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_main_v2.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub1_text.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub1_main.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub1_subtext.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub2_text.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub2_main.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub2_subtext.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub3_text.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub3_main.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub3_subtext.png" },
+          { type: "gap", size: "md" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub4_text.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub4_main.png" },
+          { type: "image", src: "../resources/images/patio/Rooftop_sub4_subtext.png" },
+        ],
         specs: [],
         notes: [],
       },
@@ -341,8 +577,8 @@
 
     const hasTab = MENU_CONFIG[group].tabs.some((item) => item.key === tab);
     const resolvedTab = hasTab ? tab : MENU_CONFIG[group].tabs[0].key;
-    const variants = TYPE_VARIANTS[resolvedTab] || [];
-    const defaultVariant = variants[0] ? variants[0].key : "";
+    const variants = getTypeVariantItems(resolvedTab);
+    const defaultVariant = getDefaultTypeVariant(resolvedTab);
     const resolvedVariant =
       group === "type" && variants.some((item) => item.key === variant)
         ? variant
@@ -384,8 +620,8 @@
     wrap.innerHTML = tabs
       .map((item) => {
         const activeClass = item.key === tab ? "is-active" : "";
-        const variants = TYPE_VARIANTS[item.key] || [];
-        const defaultVariant = variants[0] ? variants[0].key : "";
+        const variants = getTypeVariantItems(item.key);
+        const defaultVariant = getDefaultTypeVariant(item.key);
         const targetVariant =
           group === "type" && variants.some((entry) => entry.key === variant)
             ? variant
@@ -413,9 +649,114 @@
     subtitleEl.textContent = SITE_NAME;
   }
 
-  function setCanvasImage(canvasEl, imageEl, placeholderEl, imageSrc, imageAlt, imageSrcList) {
+  function createCanvasImg(src, imageAlt) {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = imageAlt;
+    img.decoding = "async";
+    img.loading = "eager";
+    img.addEventListener("error", function onError() {
+      if (img.dataset.fallbackTried === "1") {
+        img.removeEventListener("error", onError);
+        img.remove();
+        return;
+      }
+      if (/\.png$/i.test(src)) {
+        img.dataset.fallbackTried = "1";
+        img.src = src.replace(/\.png$/i, ".jpg");
+        return;
+      }
+      img.removeEventListener("error", onError);
+      img.remove();
+    });
+    return img;
+  }
+
+  function createLayoutNode(entry, imageAlt) {
+    if (!entry) return null;
+
+    if (typeof entry === "string") {
+      return createCanvasImg(entry, imageAlt);
+    }
+
+    if (entry.type === "image" && entry.src) {
+      const block = document.createElement("div");
+      block.className = "menupage-image-node";
+      if (entry.className) block.classList.add(entry.className);
+      block.appendChild(createCanvasImg(entry.src, imageAlt));
+      return block;
+    }
+
+    if (entry.type === "stack") {
+      const stack = document.createElement("div");
+      stack.className = "menupage-image-stack-col";
+      if (entry.className) stack.classList.add(entry.className);
+      (Array.isArray(entry.images) ? entry.images : []).forEach((src) => {
+        if (!src) return;
+        stack.appendChild(createCanvasImg(src, imageAlt));
+      });
+      return stack;
+    }
+
+    return null;
+  }
+
+  function buildCanvasLayout(layout, imageAlt) {
+    const wrap = document.createElement("div");
+    wrap.className = "menupage-image-layout";
+
+    layout.forEach((item) => {
+      if (!item || typeof item !== "object") return;
+
+      if (item.type === "gap") {
+        const gap = document.createElement("div");
+        gap.className = `menupage-layout-gap is-${item.size || "md"}`;
+        wrap.appendChild(gap);
+        return;
+      }
+
+      if (item.type === "row") {
+        const row = document.createElement("div");
+        row.className = "menupage-image-row";
+        if (item.className) {
+          row.classList.add(item.className);
+        }
+        if (item.columns) {
+          row.style.setProperty("--row-columns", String(item.columns));
+        }
+        const rowItems = Array.isArray(item.items) ? item.items : (Array.isArray(item.images) ? item.images : []);
+        rowItems.forEach((entry) => {
+          const node = createLayoutNode(entry, imageAlt);
+          if (node) row.appendChild(node);
+        });
+        wrap.appendChild(row);
+        return;
+      }
+
+      if (item.type === "image" && item.src) {
+        const node = createLayoutNode(item, imageAlt);
+        if (node) wrap.appendChild(node);
+      }
+    });
+
+    return wrap;
+  }
+
+  function setCanvasImage(canvasEl, imageEl, placeholderEl, imageSrc, imageAlt, imageSrcList, canvasLayout) {
     const oldStack = canvasEl.querySelector(".menupage-image-stack");
     if (oldStack) oldStack.remove();
+    const oldLayout = canvasEl.querySelector(".menupage-image-layout");
+    if (oldLayout) oldLayout.remove();
+
+    const layoutItems = Array.isArray(canvasLayout) ? canvasLayout : [];
+    if (layoutItems.length > 0) {
+      imageEl.removeAttribute("src");
+      imageEl.hidden = true;
+      placeholderEl.hidden = true;
+      canvasEl.classList.add("has-image");
+      canvasEl.appendChild(buildCanvasLayout(layoutItems, imageAlt));
+      return;
+    }
 
     const stackSources = Array.isArray(imageSrcList)
       ? imageSrcList.filter((src) => typeof src === "string" && src.trim())
@@ -430,26 +771,7 @@
       const stack = document.createElement("div");
       stack.className = "menupage-image-stack";
       stackSources.forEach((src) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = imageAlt;
-        img.decoding = "async";
-        img.loading = "eager";
-        img.addEventListener("error", function onError() {
-          if (img.dataset.fallbackTried === "1") {
-            img.removeEventListener("error", onError);
-            img.remove();
-            return;
-          }
-          if (/\.png$/i.test(src)) {
-            img.dataset.fallbackTried = "1";
-            img.src = src.replace(/\.png$/i, ".jpg");
-            return;
-          }
-          img.removeEventListener("error", onError);
-          img.remove();
-        });
-        stack.appendChild(img);
+        stack.appendChild(createCanvasImg(src, imageAlt));
       });
       canvasEl.appendChild(stack);
       return;
@@ -654,43 +976,82 @@
       return null;
     }
 
-    const variants = TYPE_VARIANTS[tab] || [];
-    if (variants.length === 0) {
+    const groups = getTypeVariantGroups(tab);
+    const variants = getTypeVariantItems(tab);
+    if (variants.length === 0 || groups.length === 0) {
       wrap.hidden = true;
       wrap.innerHTML = "";
       wrap.onclick = null;
       return null;
     }
 
-    let selected = variants.find((item) => item.key === variant) || variants[0];
+    let selected = getSelectedTypeVariant(tab, variant);
+    let selectedGroup = getSelectedTypeVariantGroup(tab, selected ? selected.key : "");
 
     wrap.hidden = false;
-    wrap.innerHTML = variants
-      .map((item) => {
-        const activeClass = item.key === selected.key ? "is-active" : "";
-        return `<button type="button" class="menupage-variant-tab ${activeClass}" data-variant-key="${escapeHtml(
-          item.key
-        )}">${escapeHtml(item.label)}</button>`;
-      })
-      .join("");
+    const renderMarkup = () => {
+      const primary = groups
+        .map((groupItem) => {
+          const activeClass = groupItem.key === selectedGroup.key ? "is-active" : "";
+          return `<button type="button" class="menupage-variant-tab menupage-variant-tab-primary ${activeClass}" data-variant-group="${escapeHtml(
+            groupItem.key
+          )}">${escapeHtml(groupItem.label)}</button>`;
+        })
+        .join("");
+
+      const secondary = (selectedGroup.items || [])
+        .map((item) => {
+          const activeClass = item.key === selected.key ? "is-active" : "";
+          return `<button type="button" class="menupage-variant-tab menupage-variant-tab-secondary ${activeClass}" data-variant-key="${escapeHtml(
+            item.key
+          )}">${escapeHtml(item.label)}</button>`;
+        })
+        .join("");
+
+      wrap.innerHTML = `
+        <div class="menupage-variant-row menupage-variant-row-primary">${primary}</div>
+        <div class="menupage-variant-row menupage-variant-row-secondary">${secondary}</div>
+      `;
+    };
+
+    renderMarkup();
 
     wrap.onclick = (event) => {
-      const btn = event.target.closest(".menupage-variant-tab");
+      const groupBtn = event.target.closest("[data-variant-group]");
+      if (groupBtn && wrap.contains(groupBtn)) {
+        const nextGroupKey = groupBtn.getAttribute("data-variant-group");
+        const nextGroup = groups.find((item) => item.key === nextGroupKey);
+        if (!nextGroup || nextGroup.key === selectedGroup.key) return;
+        selectedGroup = nextGroup;
+        selected = (selectedGroup.items || [])[0] || selected;
+        renderMarkup();
+        if (selected && typeof onVariantChange === "function") {
+          onVariantChange(selected);
+        }
+        const groupUrl = new URL(window.location.href);
+        groupUrl.searchParams.set("group", "type");
+        groupUrl.searchParams.set("tab", tab);
+        if (selected) {
+          groupUrl.searchParams.set("variant", selected.key);
+        } else {
+          groupUrl.searchParams.delete("variant");
+        }
+        window.history.replaceState({}, "", `${groupUrl.pathname}?${groupUrl.searchParams.toString()}`);
+        return;
+      }
+
+      const btn = event.target.closest("[data-variant-key]");
       if (!btn || !wrap.contains(btn)) return;
 
       const nextKey = btn.getAttribute("data-variant-key");
-      if (!nextKey || nextKey === selected.key) return;
+      if (!nextKey || (selected && nextKey === selected.key)) return;
 
       const next = variants.find((item) => item.key === nextKey);
       if (!next) return;
 
       selected = next;
-      wrap.querySelectorAll(".menupage-variant-tab").forEach((tabEl) => {
-        tabEl.classList.toggle(
-          "is-active",
-          tabEl.getAttribute("data-variant-key") === selected.key
-        );
-      });
+      selectedGroup = getSelectedTypeVariantGroup(tab, selected.key);
+      renderMarkup();
 
       if (typeof onVariantChange === "function") {
         onVariantChange(selected);
@@ -726,7 +1087,15 @@
     const imageEl = document.getElementById("menupage-image");
     const placeholderEl = document.getElementById("menupage-placeholder");
     const selectedVariant = renderTypeVariantTabs(group, tab, variant, (nextVariant) => {
-      setCanvasImage(canvasEl, imageEl, placeholderEl, nextVariant.image, title);
+      setCanvasImage(
+        canvasEl,
+        imageEl,
+        placeholderEl,
+        nextVariant.image,
+        title,
+        nextVariant.images || [],
+        nextVariant.canvasLayout || []
+      );
       playCanvasSwapAnimation(canvasEl);
     });
     const resolvedImage =
@@ -762,7 +1131,8 @@
       placeholderEl,
       resolvedImage,
       title,
-      content.images || []
+      content.images || [],
+      content.canvasLayout || []
     );
 
     renderSpecs(specs);
@@ -929,6 +1299,25 @@
     });
   }
 
+  function bindReserveLinkRouting() {
+    document.querySelectorAll(".header-reserve-link").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const isLocalPreview =
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1";
+
+        if (!isLocalPreview) return;
+
+        event.preventDefault();
+        const localConsultationUrl = new URL(
+          "./첫페이지 (AdKpMlw6KePt).html?consultation=1",
+          window.location.href
+        );
+        window.top.location.href = localConsultationUrl.toString();
+      });
+    });
+  }
+
   function initMenuPage() {
     initBasicContentGuard();
 
@@ -938,6 +1327,7 @@
     renderTabs(group, tab, variant);
     renderContent(group, tab, variant);
     initContentReveal();
+    bindReserveLinkRouting();
     bindMobileLayoutGuard();
     stabilizeMobileMenuLayout();
   }

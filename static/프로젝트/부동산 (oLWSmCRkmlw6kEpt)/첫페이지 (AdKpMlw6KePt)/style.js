@@ -142,34 +142,78 @@
         });
       }
 
+      function getConsultationTarget() {
+        return document.querySelector(".properties-N9 .consultation-anchor");
+      }
+
+      function scrollToConsultation(behavior) {
+        const target = getConsultationTarget();
+        if (!target) return false;
+
+        const headerHeight = $block.outerHeight() || 96;
+        const targetRect = target.getBoundingClientRect();
+        const extraOffset = window.innerWidth <= 992 ? 10 : 18;
+        const targetTop = targetRect.top + window.scrollY - headerHeight - extraOffset;
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: behavior || "smooth"
+        });
+
+        return true;
+      }
+
+      function clearConsultationLocation() {
+        const params = new URLSearchParams(window.location.search);
+        params.delete("consultation");
+
+        const nextSearch = params.toString();
+        const nextHash = window.location.hash === "#consultation" ? "" : window.location.hash;
+        const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ""}${nextHash}`;
+
+        history.replaceState(null, "", nextUrl);
+      }
+
+      function handleInitialConsultationRequest() {
+        const params = new URLSearchParams(window.location.search);
+        const shouldScroll = params.get("consultation") === "1" || window.location.hash === "#consultation";
+        if (!shouldScroll) return;
+
+        let attempts = 0;
+
+        const run = function() {
+          attempts += 1;
+
+          if (scrollToConsultation(attempts === 1 ? "auto" : "smooth")) {
+            clearConsultationLocation();
+            return;
+          }
+
+          if (attempts < 6) {
+            window.setTimeout(run, 180);
+          }
+        };
+
+        window.setTimeout(run, 180);
+      }
+
       function bindConsultationShortcut() {
         const $consultationLinks = $block.find(".header-reserve-link[href='#consultation']");
         if (!$consultationLinks.length) return;
 
         $consultationLinks.off("click.consultationShortcut").on("click.consultationShortcut", function(event) {
           event.preventDefault();
-
-          const target = document.querySelector(".properties-N9 .consultation-anchor");
-          if (!target) return;
-
-          const headerHeight = $block.outerHeight() || 96;
-          const targetRect = target.getBoundingClientRect();
-          const extraOffset = window.innerWidth <= 992 ? 10 : 18;
-          const targetTop = targetRect.top + window.scrollY - headerHeight - extraOffset;
-
-          window.scrollTo({
-            top: Math.max(0, targetTop),
-            behavior: "smooth"
-          });
+          if (!scrollToConsultation("smooth")) return;
 
           $block.removeClass("block-active");
           $block.find(".header-fullmenu").removeClass("fullmenu-active");
-          history.replaceState(null, "", window.location.pathname + window.location.search);
+          clearConsultationLocation();
         });
       }
 
       handleFullMenu();
       bindConsultationShortcut();
+      handleInitialConsultationRequest();
       // 리사이즈 시마다 메뉴 동작 초기화
       $(window).on("resize", function() {
         handleResize();
@@ -329,7 +373,7 @@
       const $close = $block.find(".popup-close-btn");
       const $dayoff = $block.find(".popup-dayoff-check");
       const MOBILE_POPUP_AUTOPLAY_MS = 3200;
-      const HERO_SLIDE_MS = 5200;
+      const HERO_SLIDE_MS = 4300;
       let currentIndex = 0;
       let heroIndex = 0;
       let touchStartX = 0;
@@ -843,6 +887,7 @@
 
 
 
+
 ﻿(function() {
 
 
@@ -896,10 +941,10 @@ function initN5Reveal(sectionEl) {
         slidesPerView: 1,
         spaceBetween: 0,
         loop: true,
-        speed: 820,
+        speed: 680,
         grabCursor: true,
         autoplay: {
-          delay: 3500,
+          delay: 3000,
           disableOnInteraction: false
         },
         navigation: {
@@ -922,6 +967,7 @@ function initN5Reveal(sectionEl) {
     });
   });
 })();
+
 
 
 

@@ -862,7 +862,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   z-index: 1;
   opacity: 0;
   transform: scale(1.03);
-  transition: opacity 1.5s ease, transform 7s ease
+  transition: opacity 1.15s ease, transform 5.5s ease
 }
 .properties-N4 .hero-slide.is-active {
   opacity: 1;
@@ -1494,7 +1494,8 @@ to {
 .properties-N5 {
   overflow: hidden;
   position: relative;
-  padding-top: 6rem;
+  margin-top: 0;
+  padding-top: 2.8rem;
   padding-bottom: 6rem;
   background: #eef3f8
 }
@@ -1759,7 +1760,8 @@ to {
 }
 @media (max-width: 992px) {
   .properties-N5 {
-    padding-top: 0;
+    margin-top: 0;
+    padding-top: 2rem;
     padding-bottom: 4rem
   }
   .properties-N5 .n5-lead-stack {
@@ -1816,7 +1818,8 @@ to {
 }
 @media (min-width: 993px) {
   .properties-N5 {
-    padding-top: 4.8rem;
+    margin-top: 0;
+    padding-top: 2.8rem;
     padding-bottom: 6.4rem
   }
   .properties-N5 .n5-lead-stack {
