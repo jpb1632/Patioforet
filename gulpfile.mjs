@@ -66,7 +66,7 @@ function replaceResourcePaths(str) {
   str = str.replace(/(\.\.\/)+resources\//g, '../resources/');
   str = str.replace(/(\.\.\/resources\/)(images|icons|video|css|js)\/\2\//g, '$1$2/');
   str = str.replace(/(\.\.\/resources\/)(images|icons|video|css|js)\/\2\//g, '$1$2/');
-  str = str.replace(/\/+\//g, '/');
+  str = str.replace(/(^|[^:])\/{2,}/g, '$1/');
   str = str.replace(/(\.\.\/resources\/)\.\.\//g, '$1');
 
   return str;
