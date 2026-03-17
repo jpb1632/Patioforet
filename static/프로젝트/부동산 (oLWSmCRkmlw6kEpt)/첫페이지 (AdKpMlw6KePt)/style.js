@@ -180,7 +180,7 @@
 })();
 
 
-(function() {
+﻿(function() {
   const POPUP_HIDE_KEY = "patioforet_popup_hide_until_v2";
 
   function initBasicContentGuard() {
@@ -308,7 +308,21 @@
       const $stage = $block.find(".popup-stage");
       const $popupArea = $block.find(".popup-area");
       const $popupTrack = $block.find(".popup-track");
-      const $cards = $popupTrack.find(".popup-card");
+      function reorderMobilePopupCards() {
+        if (!window.matchMedia("(max-width: 992px)").matches) return;
+        const $currentCards = $popupTrack.find(".popup-card");
+        if ($currentCards.length !== 3) return;
+        if ($popupTrack.data("mobile-order-applied") === true) return;
+
+        $popupTrack.append(
+          $currentCards.eq(1),
+          $currentCards.eq(0),
+          $currentCards.eq(2)
+        );
+        $popupTrack.data("mobile-order-applied", true);
+      }
+      reorderMobilePopupCards();
+      let $cards = $popupTrack.find(".popup-card");
       const $dots = $block.find(".popup-dots");
       const $prev = $block.find(".popup-prev");
       const $next = $block.find(".popup-next");
@@ -825,6 +839,7 @@
     });
   });
 })();
+
 
 
 

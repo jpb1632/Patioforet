@@ -1,4 +1,4 @@
-html.content-guard-on img,
+﻿html.content-guard-on img,
 html.content-guard-on video {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -94,12 +94,12 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
 }
 
 .menupage-tab:hover {
-  color: #102f5b;
+  color: #a00e15;
 }
 
 .menupage-tab.is-active {
-  color: #102f5b;
-  border-color: #102f5b;
+  color: #a00e15;
+  border-color: #a00e15;
 }
 
 .menupage-content {
@@ -148,7 +148,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
 
 .menupage-content-title-logo {
   display: block;
-  width: min(58rem, 100%);
+  width: min(49.3rem, 85%);
   height: auto;
 }
 
@@ -541,19 +541,19 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   .menu-page-view .properties-N1:hover .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active:hover .header-title .brand-mark {
-    background-image: url("../resources/images/logo_off.png") !important;
+    background-image: url("../resources/images/patio/menu_logo_white_v2.png") !important;
   }
 
   .menu-page-view .properties-N1,
   .menu-page-view .properties-N1.header-top-active,
   .menu-page-view .properties-N1.header-top-active:hover {
-    background: #102f5b !important;
+    background: #a00e15 !important;
     border-top: 0 !important;
     box-shadow: none !important;
   }
 
   .menu-page-view .properties-N1 .header-container {
-    background: #102f5b !important;
+    background: #a00e15 !important;
     border-bottom: 0 !important;
   }
 
@@ -567,7 +567,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
 
   .menu-page-view .properties-N1 .header-title .brand-badge {
     background: #fff !important;
-    color: #102f5b !important;
+    color: #a00e15 !important;
   }
 
   .menu-page-view .properties-N1 .header-gnblink span::after,
@@ -584,20 +584,20 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
 
   .menu-page-view .properties-N1 .header-utils .call-inline {
     background: #fff !important;
-    color: #102f5b !important;
+    color: #a00e15 !important;
     border: 0 !important;
   }
 
   .menu-page-view .properties-N1 .header-utils .call-inline .call-icon,
   .menu-page-view .properties-N1 .header-utils .call-inline .call-text {
-    color: #102f5b !important;
+    color: #a00e15 !important;
   }
 
   .menu-page-view .properties-N1 .header-gnbitem.menu-current .header-gnblink span {
-    color: #e80e6a !important;
+    color: #fff !important;
   }
 
-  .menu-page-view .properties-N1 .header-gnblink[href*="group=route"] span {
+  .menu-page-view .properties-N1 .header-reserve-link span {
     color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.92) !important;
     border-radius: 0.2rem;
@@ -605,30 +605,42 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
     padding: 0.2rem 1.2rem 0.1rem;
   }
 
-  .menu-page-view .properties-N1 .header-gnbitem.menu-current .header-gnblink[href*="group=route"] span {
+  .menu-page-view .properties-N1 .header-gnbitem.menu-current .header-reserve-link span,
+  .menu-page-view .properties-N1.header-top-active .header-reserve-link span,
+  .menu-page-view .properties-N1.header-top-active:hover .header-reserve-link span {
     color: #fff !important;
     border-color: rgba(255, 255, 255, 0.92) !important;
     background: transparent !important;
   }
 
-  .menu-page-view .properties-N1 .header-gnbitem.menu-current .header-gnblink[href*="group=route"] span::after,
-  .menu-page-view .properties-N1 .header-gnbitem.menu-current:hover .header-gnblink[href*="group=route"] span::after {
+  .menu-page-view .properties-N1 .header-reserve-link span::after,
+  .menu-page-view .properties-N1 .header-gnbitem.menu-current .header-reserve-link span::after,
+  .menu-page-view .properties-N1 .header-gnbitem.menu-current:hover .header-reserve-link span::after {
     content: none !important;
     display: none !important;
   }
 
   .menu-page-view .properties-N1 .fullmenu-gnbitem.menu-current > .fullmenu-gnblink span {
-    color: #e80e6a !important;
+    color: #a00e15 !important;
+  }
+
+  .menu-page-view .properties-N1 .fullmenu-gnblink.header-reserve-link span,
+  .menu-page-view .properties-N1 .fullmenu-gnbitem.menu-current > .fullmenu-gnblink.header-reserve-link span {
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.92) !important;
+    border-radius: 0.2rem;
+    background: transparent !important;
+    padding: 0.2rem 1.2rem 0.1rem;
   }
 
   .menu-page-view .properties-N1 .header-sublink:hover,
   .menu-page-view .properties-N1 .header-sublink:active {
-    background: #102f5b !important;
+    background: #a00e15 !important;
     color: #fff !important;
   }
 
   .menu-page-view .properties-N1 .header-gnbitem.item-active .header-gnblink {
-    border-bottom: 1px solid #102f5b !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.92) !important;
   }
 }
 
@@ -637,7 +649,7 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   .menu-page-view .properties-N1:hover .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active .header-title .brand-mark,
   .menu-page-view .properties-N1.header-top-active:hover .header-title .brand-mark {
-    background-image: url("../resources/images/logo_on.png") !important;
+    background-image: url("../resources/images/patio/menu_logo_white_v2.png") !important;
   }
 
   body.menu-page-view {
@@ -653,13 +665,35 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
     overflow-x: hidden;
   }
 
+  .menu-page-view .properties-N1,
+  .menu-page-view .properties-N1.header-top-active,
+  .menu-page-view .properties-N1.header-top-active:hover {
+    background: #a00e15 !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+  }
+
   .menu-page-view .properties-N1 {
     z-index: 9998;
   }
 
   .menu-page-view .properties-N1 .header-container {
+    background: #a00e15 !important;
     overflow: visible;
     padding-right: 0.4rem;
+  }
+
+  .menu-page-view .properties-N1 .header-title .brand-mark,
+  .menu-page-view .properties-N1 .header-title .brand-text,
+  .menu-page-view .properties-N1:hover .header-title .brand-mark,
+  .menu-page-view .properties-N1.header-top-active .header-title .brand-mark,
+  .menu-page-view .properties-N1.header-top-active:hover .header-title .brand-mark {
+    color: #fff !important;
+  }
+
+  .menu-page-view .properties-N1 .header-title .brand-badge {
+    background: #fff !important;
+    color: #a00e15 !important;
   }
 
   .menu-page-view .properties-N1 .header-left {
@@ -693,10 +727,18 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
   }
 
   .menu-page-view .properties-N1 .header-utils .call-inline {
+    background: #fff !important;
+    color: #a00e15 !important;
+    border: 0 !important;
     flex-shrink: 0;
     position: relative;
     z-index: 120;
     margin-right: 4.2rem;
+  }
+
+  .menu-page-view .properties-N1 .header-utils .call-inline .call-icon,
+  .menu-page-view .properties-N1 .header-utils .call-inline .call-text {
+    color: #a00e15 !important;
   }
 
   .menu-page-view .properties-N1 .btn-momenu {
@@ -707,6 +749,19 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
     transform: translateY(-50%);
     z-index: 121;
     margin-left: 0;
+  }
+
+  .menu-page-view .properties-N1 .header-utils .btn-allmenu .ico-hamburger,
+  .menu-page-view .properties-N1 .btn-momenu .ico-hamburger,
+  .menu-page-view .properties-N1.header-top-active .header-right .ico-hamburger,
+  .menu-page-view .properties-N1.header-top-active:hover .header-right .ico-hamburger {
+    background: #fff !important;
+  }
+
+  .menu-page-view .properties-N1 .header-reserve-link span {
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.92) !important;
+    background: transparent !important;
   }
 
   .menu-page-view .fixed-consult-bar.is-split {
@@ -915,3 +970,5 @@ html.content-guard-on *:not(input):not(textarea):not([contenteditable="true"]) {
     animation: none !important;
   }
 }
+
+

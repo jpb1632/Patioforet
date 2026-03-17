@@ -1,7 +1,7 @@
 ﻿(function () {
-  const SITE_NAME = "양주 백석 모아엘가 그랑데";
-  const FIXED_CONTENT_TITLE = "양주 백석 모아엘가 그랑데";
-  const CONTENT_TITLE_LOGO_SRC = "../resources/images/logo_on.png";
+  const SITE_NAME = "힐스테이트 양주옥정 파티오포레";
+  const FIXED_CONTENT_TITLE = "힐스테이트 양주옥정 파티오포레";
+  const CONTENT_TITLE_LOGO_SRC = "../resources/images/patio/main_logo_color_v2.png";
   function initBasicContentGuard() {
     if (window.__basicContentGuardInitialized) return;
     window.__basicContentGuardInitialized = true;
@@ -948,4 +948,5 @@
     initMenuPage();
   }
 })();
+
 

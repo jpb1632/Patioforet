@@ -1277,6 +1277,21 @@ to {
  }
 }
 @media (max-width: 992px) {
+.properties-N4 .hero-slider {
+    inset: 0 0 auto 0;
+    height: calc(100vw * 2520 / 1620)
+ }
+.properties-N4 .contents-container:not(.fullscreen) {
+    min-height: calc(100vw * 2520 / 1620)
+ }
+.properties-N4 .hero-slide,
+  .properties-N4 .hero-slide.is-active {
+    transform: none
+ }
+.properties-N4 .hero-slide img {
+    object-fit: cover;
+    object-position: center top
+ }
 .properties-N4 .hero-controls {
     bottom: 1.1rem;
     gap: 1rem;
@@ -1296,14 +1311,14 @@ to {
     height: 0.75rem
  }
 .properties-N4 {
-    padding-top: 8.8rem;
-    padding-bottom: 2.8rem;
+    padding-top: 0;
+    padding-bottom: 0;
     background: #78b7e4 !important;
     --icon-fs-mlw6lqc7: 1.4rem;
     --icon-fs-mlw8xjhm: 1.4rem
  }
-.properties-N4 .contents-container:not(.fullscreen) {
-    min-height: 0
+.properties-N4 .contents-container {
+    align-items: flex-start
  }
 .properties-N4 .contents-inner {
     flex-direction: column;
@@ -1314,8 +1329,9 @@ to {
     position: static;
     width: 100%;
     padding: 0 1.2rem;
+    padding-top: 9.2rem;
     transform: none;
-    margin-bottom: 0.6rem
+    margin-bottom: 0.2rem
  }
 .properties-N4 .hero-copy {
     width: min(64rem, 100%);
@@ -1743,7 +1759,7 @@ to {
 }
 @media (max-width: 992px) {
   .properties-N5 {
-    padding-top: 2rem;
+    padding-top: 0;
     padding-bottom: 4rem
   }
   .properties-N5 .n5-lead-stack {
