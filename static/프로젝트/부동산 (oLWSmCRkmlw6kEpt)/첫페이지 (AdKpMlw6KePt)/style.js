@@ -590,6 +590,10 @@
         startHeroAutoplay();
       }
 
+      function isMobileHero() {
+        return window.matchMedia("(max-width: 992px)").matches;
+      }
+
       function fitDesktopPopup() {
         if (!$stage.length) return;
         const stageEl = $stage.get(0);
@@ -681,6 +685,16 @@
         if (!touch) return;
         const diffX = touch.clientX - heroTouchStartX;
         const diffY = touch.clientY - heroTouchStartY;
+        if (isMobileHero()) {
+          if (Math.abs(diffX) < 40 || Math.abs(diffX) < Math.abs(diffY)) return;
+          if (diffX < 0) {
+            goHero(heroIndex + 1);
+          } else {
+            goHero(heroIndex - 1);
+          }
+          restartHeroAutoplay();
+          return;
+        }
         handleHeroGesture(diffX, diffY);
       });
 
@@ -814,156 +828,10 @@
 
 
 
-(function() {
-  function initN5MobileZoom(sectionEl) {
-    if (!sectionEl || sectionEl.querySelector(".n5-lightbox")) return;
-    var coarseMq = window.matchMedia("(pointer: coarse)");
-    var mobileMq = window.matchMedia("(max-width: 992px)");
-    var canOpen = function() {
-      return coarseMq.matches || mobileMq.matches;
-    };
+﻿(function() {
 
-    var overlay = document.createElement("div");
-    overlay.className = "n5-lightbox";
-    overlay.setAttribute("aria-hidden", "true");
-    overlay.innerHTML = [
-      '<div class="n5-lightbox-inner" role="dialog" aria-modal="true" aria-label="프리미엄 이미지 상세보기">',
-      '  <img class="n5-lightbox-image" alt="프리미엄 이미지 상세보기">',
-      '  <button type="button" class="n5-lightbox-close" aria-label="닫기">&times;</button>',
-      "</div>"
-    ].join("");
-    sectionEl.appendChild(overlay);
 
-    var lightboxImage = overlay.querySelector(".n5-lightbox-image");
-    var closeButton = overlay.querySelector(".n5-lightbox-close");
-    var images = Array.prototype.slice.call(sectionEl.querySelectorAll(".n5-card-thumb img"));
-    var currentIndex = -1;
-    var scrollBackup = "";
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var touchDeltaX = 0;
-    var touchDeltaY = 0;
-    var touchTracking = false;
-
-    var close = function() {
-      overlay.classList.remove("is-open");
-      overlay.setAttribute("aria-hidden", "true");
-      lightboxImage.removeAttribute("src");
-      document.body.style.overflow = scrollBackup;
-      currentIndex = -1;
-    };
-
-    var renderIndex = function(index) {
-      if (!images.length) return;
-      var count = images.length;
-      currentIndex = ((index % count) + count) % count;
-      var target = images[currentIndex];
-      lightboxImage.src = target.getAttribute("src") || "";
-      lightboxImage.alt = target.getAttribute("alt") || "프리미엄 이미지 상세보기";
-    };
-
-    var openByIndex = function(index) {
-      if (!images.length || !canOpen()) return;
-      scrollBackup = document.body.style.overflow || "";
-      renderIndex(index);
-      overlay.classList.add("is-open");
-      overlay.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    };
-
-    var showPrev = function() {
-      if (!overlay.classList.contains("is-open")) return;
-      renderIndex(currentIndex - 1);
-    };
-
-    var showNext = function() {
-      if (!overlay.classList.contains("is-open")) return;
-      renderIndex(currentIndex + 1);
-    };
-
-    overlay.addEventListener("click", function(evt) {
-      if (evt.target === overlay || evt.target === closeButton) {
-        close();
-      }
-    });
-
-    document.addEventListener("keydown", function(evt) {
-      if (!overlay.classList.contains("is-open")) return;
-      if (evt.key === "Escape") {
-        close();
-      } else if (evt.key === "ArrowLeft") {
-        showPrev();
-      } else if (evt.key === "ArrowRight") {
-        showNext();
-      }
-    });
-
-    overlay.addEventListener(
-      "touchstart",
-      function(evt) {
-        if (!overlay.classList.contains("is-open")) return;
-        var touch = evt.touches && evt.touches[0];
-        if (!touch) return;
-        touchTracking = true;
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        touchDeltaX = 0;
-        touchDeltaY = 0;
-      },
-      { passive: true, capture: true }
-    );
-
-    overlay.addEventListener(
-      "touchmove",
-      function(evt) {
-        if (!overlay.classList.contains("is-open") || !touchTracking) return;
-        var touch = evt.touches && evt.touches[0];
-        if (!touch) return;
-        touchDeltaX = touch.clientX - touchStartX;
-        touchDeltaY = touch.clientY - touchStartY;
-
-        // In lightbox, prioritize horizontal swipe for next/prev.
-        if (Math.abs(touchDeltaX) > Math.abs(touchDeltaY)) {
-          evt.preventDefault();
-        }
-      },
-      { passive: false, capture: true }
-    );
-
-    overlay.addEventListener(
-      "touchend",
-      function(evt) {
-        if (!overlay.classList.contains("is-open") || !touchTracking) return;
-        var touch = evt.changedTouches && evt.changedTouches[0];
-        if (touch) {
-          touchDeltaX = touch.clientX - touchStartX;
-          touchDeltaY = touch.clientY - touchStartY;
-        }
-
-        if (Math.abs(touchDeltaX) > 42 && Math.abs(touchDeltaX) > Math.abs(touchDeltaY) * 1.2) {
-          if (touchDeltaX < 0) {
-            showNext();
-          } else {
-            showPrev();
-          }
-        }
-
-        touchTracking = false;
-        touchDeltaX = 0;
-        touchDeltaY = 0;
-      },
-      { passive: true, capture: true }
-    );
-
-    images.forEach(function(img, index) {
-      img.classList.add("n5-zoomable");
-      img.addEventListener("click", function() {
-        openByIndex(index);
-      });
-    });
-  }
-
-  function initN5Reveal(sectionEl) {
+function initN5Reveal(sectionEl) {
     if (!sectionEl) return;
     var leadItems = sectionEl.querySelectorAll(".n5-lead-item");
     var topItems = sectionEl.querySelectorAll(".n5-mobile-top-item");
@@ -1035,25 +903,26 @@
         }
       });
 
-      initN5MobileZoom(this);
       initN5Reveal(this);
     });
   });
 })();
 
-(function() {
+
+
+﻿(function() {
   function initN6Reveal() {
     var section = document.querySelector('.properties-N6[id="Wtmlw6KE6z"]');
     if (!section) return;
 
-    var items = section.querySelectorAll(".n6-image-item");
+    var items = section.querySelectorAll('.n6-image-item');
     if (!items.length) return;
 
-    section.classList.add("reveal-ready");
+    section.classList.add('reveal-ready');
 
     var revealItem = function(item) {
       if (!item) return;
-      item.classList.add("in-view");
+      item.classList.add('in-view');
     };
 
     if (!("IntersectionObserver" in window)) {
@@ -1072,7 +941,7 @@
       });
     }, {
       threshold: 0.2,
-      rootMargin: "0px 0px -12% 0px"
+      rootMargin: '0px 0px -12% 0px'
     });
 
     items.forEach(function(item) {
@@ -1080,10 +949,14 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initN6Reveal);
-  } else {
+  function initN6() {
     initN6Reveal();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initN6);
+  } else {
+    initN6();
   }
 })();
 

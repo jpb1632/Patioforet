@@ -1278,7 +1278,7 @@ to {
 }
 @media (max-width: 992px) {
 .properties-N4 .hero-controls {
-    bottom: 2rem;
+    bottom: 1.1rem;
     gap: 1rem;
     padding: 0 1.2rem
  }
@@ -1288,7 +1288,8 @@ to {
     font-size: 2.4rem
  }
 .properties-N4 .hero-dots {
-    gap: 0.6rem
+    gap: 0.6rem;
+    transform: translateY(1.5rem)
  }
 .properties-N4 .hero-dot {
     width: 0.75rem;
@@ -1352,6 +1353,28 @@ to {
     line-height: 1.32;
     padding: 0.5rem 1.15rem
  }
+.properties-N4.hero-theme-bright .hero-copy-title {
+      color: #ffffff;
+      text-shadow:
+        0 1rem 2.6rem rgba(7, 17, 31, 0.24),
+        0 0.15rem 0 rgba(255, 255, 255, 0.1)
+ }
+.properties-N4.hero-theme-gold .hero-copy-title {
+    color: #c7964a;
+    text-shadow:
+      0 1.05rem 2.85rem rgba(31, 20, 7, 0.28),
+      0 0.16rem 0 rgba(255, 255, 255, 0.18),
+      0 0 0.95rem rgba(255, 244, 224, 0.08);
+    -webkit-text-stroke: 0.015em rgba(63, 42, 18, 0.14)
+ }
+.properties-N4.hero-theme-bright .hero-copy-subtitle {
+    color: #183355;
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(24, 51, 85, 0.16);
+    box-shadow:
+      0 0.8rem 2.2rem rgba(16, 30, 48, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.82)
+ }
 .properties-N4 .popup-overlay, .popup-overlay-hoisted {
     padding: 1.6rem 0.8rem
  }
@@ -1377,7 +1400,13 @@ to {
  }
 .properties-N4 .popup-card, .popup-overlay-hoisted .popup-card {
     flex: 0 0 100%;
-    max-width: 100%
+    max-width: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 0.55rem;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow:
+      0 1rem 2.6rem rgba(9, 18, 31, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset
  }
 .properties-N4 .popup-nav, .popup-overlay-hoisted .popup-nav {
     display: inline-flex;
@@ -1473,7 +1502,8 @@ to {
   visibility: hidden
 }
 .properties-N5 .n5-lead-item img,
-.properties-N5 .n5-lead-item video {
+.properties-N5 .n5-lead-item video,
+.properties-N5 .n5-lead-item iframe {
   display: block;
   width: 100%;
   height: auto
@@ -1481,8 +1511,14 @@ to {
 .properties-N5 .n5-lead-link {
   display: block
 }
-.properties-N5 .n5-lead-item video {
+.properties-N5 .n5-lead-item video,
+.properties-N5 .n5-lead-item iframe {
   background: #000
+}
+.properties-N5 .n5-lead-item iframe {
+  aspect-ratio: 16 / 9;
+  border: 0;
+  height: auto
 }
 .properties-N5.reveal-ready .n5-lead-item {
   transition: opacity 1.25s ease, transform 1.25s ease;
@@ -1614,11 +1650,11 @@ to {
 }
 .properties-N5 .n5-btn-next {
   right: clamp(4rem, 9vw, 14rem);
-  display: flex !important
+  display: none !important
 }
 .properties-N5 .n5-pagination {
   position: absolute !important;
-  left: 50% !important;
+  left: 40% !important;
   right: auto !important;
   width: auto !important;
   bottom: 2rem;
@@ -1633,7 +1669,7 @@ to {
 .properties-N5 .swiper-pagination-bullet {
   width: 0.8rem;
   height: 0.8rem;
-  background: rgba(180, 180, 180, 0.85);
+  background: rgba(244, 246, 249, 0.96);
   opacity: 1
 }
 .properties-N5 .swiper-pagination-bullet + .swiper-pagination-bullet {
@@ -1742,9 +1778,10 @@ to {
     display: none
   }
   .properties-N5 .n5-btn-next {
-    right: 1.2rem
+    display: none !important
   }
   .properties-N5 .n5-pagination {
+    left: 50% !important;
     bottom: 1.2rem
   }
   .properties-N5 .n5-lightbox {
@@ -1866,6 +1903,67 @@ to {
 .properties-N6 .n6-mobile-only {
   display: none
 }
+.properties-N6 .n6-mobile-location-block {
+  display: flex;
+  flex-direction: column
+}
+.properties-N6 .n6-mobile-location-block img + img {
+  margin-top: 0
+}
+.properties-N6 .n6-mobile-community-block {
+  display: flex;
+  flex-direction: column
+}
+.properties-N6 .n6-mobile-community-block img + img,
+.properties-N6 .n6-mobile-community-block img + .n6-mobile-community-pair,
+.properties-N6 .n6-mobile-community-pair + .n6-mobile-community-pair {
+  margin-top: 0
+}
+.properties-N6 .n6-mobile-community-block img[src*="M_Community1_main_a.png"] {
+  margin-top: 3rem
+}
+.properties-N6 .n6-mobile-community-block img[src*="M_Community1_main_b.png"] {
+  margin-top: 2.6rem
+}
+.properties-N6 .n6-mobile-community-block img[src*="M_Community1_main_c.png"] {
+  margin-top: 2.6rem;
+  margin-bottom: 3rem
+}
+.properties-N6 .n6-mobile-community-block img[src*="M_Community1_main.png"] {
+  margin-top: 2.4rem
+}
+.properties-N6 .n6-mobile-community-block .n6-mobile-community-pair {
+  margin-top: 1.8rem
+}
+.properties-N6 .n6-mobile-community-block .n6-mobile-community-pair + .n6-mobile-community-pair {
+  margin-top: 1.8rem
+}
+.properties-N6 .n6-mobile-community-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0
+}
+.properties-N6 .n6-mobile-rooftop-block {
+  display: flex;
+  flex-direction: column
+}
+.properties-N6 .n6-mobile-rooftop-block img + img {
+  margin-top: 0
+}
+.properties-N6 .n6-mobile-rooftop-block > img:first-child {
+  margin-top: 3.2rem
+}
+.properties-N6 .n6-mobile-rooftop-block > img:nth-child(2) {
+  margin-top: 1.4rem
+}
+.properties-N6 .n6-mobile-rooftop-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.2rem
+}
+.properties-N6 .n6-mobile-rooftop-group img + img {
+  margin-top: 0
+}
 .properties-N6 .n6-mobile-type-label {
   display: none
 }
@@ -1917,6 +2015,15 @@ to {
   }
   .properties-N6 .n6-mobile-only {
     display: block
+  }
+  .properties-N6 .n6-mobile-location {
+    margin-top: 1.6rem !important
+  }
+  .properties-N6 .n6-mobile-community {
+    margin-top: 2rem !important
+  }
+  .properties-N6 .n6-mobile-rooftop {
+    margin-top: 2rem !important
   }
   .properties-N6 .n6-mobile-only + .n6-mobile-only {
     margin-top: 0 !important
@@ -1981,6 +2088,16 @@ to {
   width: 100%;
   height: auto
 }
+.properties-N7 .n7-mobile-only {
+  display: none
+}
+.properties-N7 .n7-mobile-premium-block {
+  display: flex;
+  flex-direction: column
+}
+.properties-N7 .n7-mobile-premium-block img + img {
+  margin-top: 2.2rem
+}
 .properties-N7.reveal-ready .n7-image-item {
   opacity: 0;
   transform: translateY(44px);
@@ -1998,6 +2115,15 @@ to {
   }
   .properties-N7 .n7-image-item + .n7-image-item {
     margin-top: 2rem
+  }
+  .properties-N7 .n7-hide-mobile {
+    display: none
+  }
+  .properties-N7 .n7-mobile-only {
+    display: block
+  }
+  .properties-N7 .n7-mobile-premium {
+    margin-top: 3.2rem !important
   }
 }
 @media (prefers-reduced-motion: reduce) {
