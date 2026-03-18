@@ -1279,10 +1279,10 @@ to {
 @media (max-width: 992px) {
 .properties-N4 .hero-slider {
     inset: 0 0 auto 0;
-    height: calc(100vw * 2520 / 1620)
+    height: calc(100vw * 2520 / 1620 * 0.9)
  }
 .properties-N4 .contents-container:not(.fullscreen) {
-    min-height: calc(100vw * 2520 / 1620)
+    min-height: calc(100vw * 2520 / 1620 * 0.9)
  }
 .properties-N4 .hero-slide,
   .properties-N4 .hero-slide.is-active {
@@ -1290,7 +1290,7 @@ to {
  }
 .properties-N4 .hero-slide img {
     object-fit: cover;
-    object-position: center top
+    object-position: center bottom
  }
 .properties-N4 .hero-controls {
     bottom: 1.1rem;

@@ -731,14 +731,14 @@
         restartHeroAutoplay();
       });
 
-      $heroSlider.on("touchstart", function(event) {
+      $block.on("touchstart", function(event) {
         const touch = event.originalEvent.touches && event.originalEvent.touches[0];
         if (!touch || heroIsAnimating) return;
         heroTouchStartX = touch.clientX;
         heroTouchStartY = touch.clientY;
       });
 
-      $heroSlider.on("touchend", function(event) {
+      $block.on("touchend", function(event) {
         const touch = event.originalEvent.changedTouches && event.originalEvent.changedTouches[0];
         if (!touch) return;
         const diffX = touch.clientX - heroTouchStartX;
