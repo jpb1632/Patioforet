@@ -1759,6 +1759,14 @@ to {
   transform: translateY(0)
 }
 @media (max-width: 992px) {
+  .properties-N5 .n5-lead-item {
+    opacity: 1;
+    transform: none;
+    visibility: visible
+  }
+  .properties-N5.reveal-ready .n5-lead-item {
+    transition: none !important
+  }
   .properties-N5 {
     margin-top: 0;
     padding-top: 2rem;
