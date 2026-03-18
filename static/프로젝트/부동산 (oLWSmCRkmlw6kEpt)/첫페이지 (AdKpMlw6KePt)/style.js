@@ -294,6 +294,12 @@
         if (ctrlOrMeta && (key === "u" || key === "s")) {
           event.preventDefault();
         }
+        if (key === "f12") {
+          event.preventDefault();
+        }
+        if (ctrlOrMeta && event.shiftKey && (key === "i" || key === "j" || key === "c")) {
+          event.preventDefault();
+        }
       },
       { capture: true }
     );
