@@ -1951,6 +1951,10 @@ to {
   display: flex;
   flex-direction: column
 }
+.properties-N6 .n6-mobile-location-block img {
+  width: 100%;
+  height: auto
+}
 .properties-N6 .n6-mobile-location-block img + img {
   margin-top: 0
 }
@@ -2061,7 +2065,10 @@ to {
     display: block
   }
   .properties-N6 .n6-mobile-location {
-    margin-top: 1.6rem !important
+    margin-top: 1.6rem !important;
+    margin-left: -1.6rem !important;
+    margin-right: -1.6rem !important;
+    border-radius: 0
   }
   .properties-N6 .n6-mobile-community {
     margin-top: 2rem !important
