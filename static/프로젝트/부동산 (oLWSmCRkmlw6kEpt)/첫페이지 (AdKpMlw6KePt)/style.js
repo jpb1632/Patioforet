@@ -294,12 +294,6 @@
         if (ctrlOrMeta && (key === "u" || key === "s")) {
           event.preventDefault();
         }
-        if (key === "f12") {
-          event.preventDefault();
-        }
-        if (ctrlOrMeta && event.shiftKey && (key === "i" || key === "j" || key === "c")) {
-          event.preventDefault();
-        }
       },
       { capture: true }
     );
@@ -737,14 +731,14 @@
         restartHeroAutoplay();
       });
 
-      $block.on("touchstart", function(event) {
+      $heroSlider.on("touchstart", function(event) {
         const touch = event.originalEvent.touches && event.originalEvent.touches[0];
         if (!touch || heroIsAnimating) return;
         heroTouchStartX = touch.clientX;
         heroTouchStartY = touch.clientY;
       });
 
-      $block.on("touchend", function(event) {
+      $heroSlider.on("touchend", function(event) {
         const touch = event.originalEvent.changedTouches && event.originalEvent.changedTouches[0];
         if (!touch) return;
         const diffX = touch.clientX - heroTouchStartX;
