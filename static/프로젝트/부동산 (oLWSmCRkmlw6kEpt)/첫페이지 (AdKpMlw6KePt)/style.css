@@ -1863,6 +1863,13 @@ to {
     height: 4.4rem;
     font-size: 2.2rem
   }
+  .properties-N5 .n5-lead-item.n5-lead-video,
+  .properties-N5.reveal-ready .n5-lead-item.n5-lead-video {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition: none
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .properties-N5.reveal-ready .n5-lead-item {
