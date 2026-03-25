@@ -213,7 +213,7 @@
   const CONTENT_CONFIG = {
     business: {
       overview: {
-        title: "양주 백석 모아엘가 그랑데 사업개요",
+        title: "힐스테이트 양주옥정 파티오포레 사업개요",
         subtitle: "양주에서 처음 만나는 힐스테이트",
         copy: "집이 라이프를 바꾸는 순간",
         copySub: "",
@@ -227,7 +227,7 @@
         notes: [],
       },
       location: {
-        title: "양주 백석 모아엘가 그랑데 입지환경",
+        title: "힐스테이트 양주옥정 파티오포레 입지환경",
         subtitle: "양주 옥정신도시의 중심에서",
         copy: "도시와 숲을 동시에 마주하는 라이프",
         copySub: "",
@@ -240,7 +240,7 @@
         notes: [],
       },
       brand: {
-        title: "양주 백석 모아엘가 그랑데 브랜드소개",
+        title: "힐스테이트 양주옥정 파티오포레 브랜드소개",
         subtitle: "코르도바라이프의 시작",
         copy: "힐스테이트 파티오포레!",
         copySub: "",
@@ -271,7 +271,7 @@
         notes: [],
       },
       premium: {
-        title: "양주 백석 모아엘가 그랑데 프리미엄",
+        title: "힐스테이트 양주옥정 파티오포레 프리미엄",
         subtitle: "아파트에서 못 다 이룬",
         copy: "공간의 로망을 현실로!",
         copySub: "",
@@ -292,7 +292,7 @@
         notes: [],
       },
       default: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "프로젝트 정보",
         copy: "해당 메뉴의 상세 이미지를 이 영역에 배치합니다.",
         copySub: "",
@@ -305,7 +305,7 @@
       design: {
         subtitle: "단지설계",
         copy: "양주의 새로운 중심에서 만나는",
-        copySub: "모아엘가 그랑데의 프리미엄 라이프!",
+        copySub: "힐스테이트 파티오포레의 프리미엄 라이프!",
         image: "../resources/images/complex guide1.jpg",
       },
       community: {
@@ -447,7 +447,7 @@
         image: "../resources/images/complex guide5.jpg",
       },
       default: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "단지 안내",
         copy: "해당 메뉴의 상세 이미지를 이 영역에 배치합니다.",
         copySub: "",
@@ -458,7 +458,7 @@
     },
     type: {
       type: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "일상을 다채롭게 채워주는",
         copy: "수준 높은 33개의 커뮤니티",
         copySub: "",
@@ -467,7 +467,7 @@
         notes: [],
       },
       interior: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "아파트에선 상상만 했던,",
         copy: "로망을 현실로 만들어주는 타운하우스!",
         copySub: "",
@@ -496,7 +496,7 @@
         notes: [],
       },
       default: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "타입 안내",
         copy: "해당 메뉴의 상세 이미지를 이 영역에 배치합니다.",
         copySub: "",
@@ -507,7 +507,7 @@
     },
     route: {
       default: {
-        title: "양주 백석 모아엘가 그랑데",
+        title: "힐스테이트 양주옥정 파티오포레",
         subtitle: "주거의 새로운 패러다임",
         copy: "합리적인 임대료로 10년까지 보장!",
         copySub: "",

@@ -19,10 +19,12 @@ coverage/
 
 # editor / OS
 .vscode/
+.claude/
 .DS_Store
 Thumbs.db
 
 # temp/session
 .temha_session.json
 .backup/
+workspace/
 정준교-workspace/
